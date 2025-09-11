@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: debug-pod
+  namespace: excelidraw
+spec:
+  containers:
+  - name: debug
+    image: postgres:15-alpine
+    command: ["sleep", "3600"]
+    env:
+      - name: POSTGRES_USER
+        valueFrom:
+          secretKeyRef:
+            name: excelidraw-database-secret
+            key: POSTGRES_USER
+      - name: POSTGRES_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: excelidraw-database-secret
+            key: POSTGRES_PASSWORD
+      - name: POSTGRES_DB
+        valueFrom:
+          secretKeyRef:
+            name: excelidraw-database-secret
+            key: POSTGRES_DB
+  restartPolicy: Never

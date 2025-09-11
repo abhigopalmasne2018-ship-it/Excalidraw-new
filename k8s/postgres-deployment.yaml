@@ -39,7 +39,6 @@ spec:
         volumeMounts:
           - name: postgres-storage
             mountPath: /var/lib/postgresql/data
-            subPath: postgres
         readinessProbe:
           exec:
             command:
@@ -48,9 +47,9 @@ spec:
               - $(POSTGRES_USER)
               - -d
               - $(POSTGRES_DB)
-          initialDelaySeconds: 5
+          initialDelaySeconds: 10
           periodSeconds: 5
-          failureThreshold: 5
+          failureThreshold: 6
         livenessProbe:
           exec:
             command:
@@ -64,11 +63,11 @@ spec:
           failureThreshold: 3
         resources:
           requests:
-            cpu: 50m
-            memory: 128Mi
-          limits:
-            cpu: 200m
+            cpu: 100m
             memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
       volumes:
         - name: postgres-storage
           persistentVolumeClaim:
