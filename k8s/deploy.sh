@@ -28,12 +28,23 @@ echo "🔧 Deploying backend services..."
 kubectl apply -f k8s/http-backend-deployment.yaml
 kubectl apply -f k8s/ws-backend-deployment.yaml
 
+# Wait for backends to be ready
+echo "⏳ Waiting for backend services to be ready..."
+kubectl wait --for=condition=available --timeout=300s deployment/excelidraw-http-backend -n excelidraw
+kubectl wait --for=condition=available --timeout=300s deployment/excelidraw-ws-backend -n excelidraw
+
 # Apply frontend
 echo "🎨 Deploying frontend..."
 kubectl apply -f k8s/frontend-deployment.yaml
+
+# Wait for frontend to be ready
+echo "⏳ Waiting for frontend to be ready..."
+kubectl wait --for=condition=available --timeout=300s deployment/excelidraw-frontend -n excelidraw
 
 # Apply ingress
 echo "🌐 Setting up ingress..."
 kubectl apply -f k8s/ingress.yaml
 
 echo "✅ Deployment complete!"
+echo "🌍 Your app will be available at: https://excelidraw.abhishek97.icu"
+echo "📊 Check status with: kubectl get pods -n excelidraw"

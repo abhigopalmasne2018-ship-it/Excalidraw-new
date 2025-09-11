@@ -5,7 +5,7 @@ metadata:
   name: excelidraw-frontend-ingress
   namespace: excelidraw
   annotations:
-    # Enable cert-manager to automatically provision certificates
+    # Use the existing cluster issuer from your betteruptime project
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     # Force HTTPS redirect
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -38,7 +38,7 @@ metadata:
   name: excelidraw-api-ingress
   namespace: excelidraw
   annotations:
-    # Enable cert-manager to automatically provision certificates
+    # Use the existing cluster issuer from your betteruptime project
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     # Force HTTPS redirect
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
@@ -77,7 +77,7 @@ metadata:
   name: excelidraw-ws-ingress
   namespace: excelidraw
   annotations:
-    # Enable cert-manager to automatically provision certificates
+    # Use the existing cluster issuer from your betteruptime project
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     # Force HTTPS redirect
     nginx.ingress.kubernetes.io/ssl-redirect: "true"

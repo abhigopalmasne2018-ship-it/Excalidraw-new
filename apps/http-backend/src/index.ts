@@ -9,6 +9,16 @@ import cors from "cors";
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Health check endpoint for Kubernetes
+app.get("/health", (req, res) => {
+    res.status(200).json({ 
+        status: "healthy", 
+        timestamp: new Date().toISOString(),
+        service: "http-backend"
+    });
+});
+
 // app.use(cors({
 //   origin: "http://localhost:3000",  // frontend origin
 //   credentials: true,

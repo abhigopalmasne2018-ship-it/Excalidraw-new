@@ -15,31 +15,21 @@ spec:
     spec:
       containers:
         - name: ws-backend
-          image: node:20-alpine
-          workingDir: /app
-          command: 
-            - sh
-            - -c
-            - |
-              # Install pnpm
-              npm install -g pnpm
-              
-              # Clone the repo (you'll need to build and push your own image)
-              # For now, this is a placeholder - you'll need to create Docker images
-              echo "Starting WebSocket backend..."
-              sleep infinity
+          # TODO: Replace with your actual Docker image
+          image: aabhii/excelidraw-ws-backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
             - name: DATABASE_URL
               valueFrom:
                 secretKeyRef:
-                  name: excelidraw-secret
+                  name: excelidraw-database-secret
                   key: DATABASE_URL
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: excelidraw-secret
+                  name: excelidraw-app-secret
                   key: JWT_SECRET
             - name: WS_PORT
               valueFrom:

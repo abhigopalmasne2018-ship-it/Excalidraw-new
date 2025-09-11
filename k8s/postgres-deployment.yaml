@@ -20,17 +20,17 @@ spec:
           - name: POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: excelidraw-secret
+                name: excelidraw-database-secret
                 key: POSTGRES_USER
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: excelidraw-secret
+                name: excelidraw-database-secret
                 key: POSTGRES_PASSWORD
           - name: POSTGRES_DB
             valueFrom:
-              configMapKeyRef:
-                name: excelidraw-config
+              secretKeyRef:
+                name: excelidraw-database-secret
                 key: POSTGRES_DB
           - name: PGDATA
             value: /var/lib/postgresql/data/pgdata

@@ -15,19 +15,9 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: node:20-alpine
-          workingDir: /app
-          command: 
-            - sh
-            - -c
-            - |
-              # Install pnpm
-              npm install -g pnpm
-              
-              # Clone the repo (you'll need to build and push your own image)
-              # For now, this is a placeholder - you'll need to create Docker images
-              echo "Starting Frontend..."
-              sleep infinity
+          # TODO: Replace with your actual Docker image
+          image: aabhii/excelidraw-frontend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
@@ -55,10 +45,12 @@ kind: Service
 metadata:
   name: excelidraw-frontend
   namespace: excelidraw
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
+  type: ClusterIP
   selector:
     app: excelidraw-frontend
   ports:
-    - port: 80
-      targetPort: 3000
-  type: ClusterIP
+  - port: 80
+    targetPort: 3000
